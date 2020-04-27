@@ -1,21 +1,21 @@
-import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
-import java.rmi.Naming;
-import java.rmi.RMISecurityManager;
-import java.lang.SecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.rmi.registry.Registry;
-import java.rmi.registry.LocateRegistry;
 
 public class MathServer extends UnicastRemoteObject implements MathService {
 
-	
+	private int clientCount = 0;
 	
 	public MathServer() throws RemoteException {
-		super();
-		
+		super();	
+	}
+	
+	
+	public synchronized int clientCount() throws RemoteException {
+		clientCount++;
+		return clientCount;
 	}
 
 	@Override
@@ -50,9 +50,6 @@ public class MathServer extends UnicastRemoteObject implements MathService {
 	
 	public static void main(String[] args) {
 		
-		if(System.getSecurityManager() == null)
-			System.setSecurityManager(new RMISecurityManager());
-		
         try{
 
    		 	MathServer svr = new MathServer();
@@ -70,5 +67,8 @@ public class MathServer extends UnicastRemoteObject implements MathService {
             System.err.println(abe.getMessage());
         }
 	}
+
+
+	
 
 }

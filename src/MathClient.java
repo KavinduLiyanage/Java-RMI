@@ -17,8 +17,9 @@ public class MathClient {
 		
         try {
         	
-            service = (MathService) Naming.lookup("//localhost/CalculatorService");
+            service = (MathService)Naming.lookup("//localhost/CalculatorService");
 
+            System.out.println("Number of clients connected : " + service.clientCount());
             System.out.println  ("Add : " + service.add(2,2));
             System.out.println  ("Subtract : " + service.subtract(5,2));
             System.out.println  ("Multiply : " + service.multiply(2,6));

@@ -2,6 +2,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface MathService extends Remote{
+	
+	public int clientCount() throws RemoteException;
 
 	public int add(int a, int b) throws RemoteException;
 	
